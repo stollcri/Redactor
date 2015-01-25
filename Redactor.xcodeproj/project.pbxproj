@@ -14,6 +14,8 @@
 		7D86FD031A6FE825004552A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D86FD021A6FE825004552A6 /* Images.xcassets */; };
 		7D86FD061A6FE825004552A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D86FD041A6FE825004552A6 /* LaunchScreen.xib */; };
 		7D86FD121A6FE825004552A6 /* RedactorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FD111A6FE825004552A6 /* RedactorTests.m */; };
+		7D86FD1D1A6FF17C004552A6 /* Redactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FD1C1A6FF17C004552A6 /* Redactor.m */; };
+		7DC0875A1A701C1400AF307F /* SeamCarve.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DC087581A701C1400AF307F /* SeamCarve.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		7D86FD0B1A6FE825004552A6 /* RedactorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedactorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D86FD101A6FE825004552A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D86FD111A6FE825004552A6 /* RedactorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedactorTests.m; sourceTree = "<group>"; };
+		7D86FD1B1A6FF17C004552A6 /* Redactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Redactor.h; path = Redactor/Redactor.h; sourceTree = "<group>"; };
+		7D86FD1C1A6FF17C004552A6 /* Redactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Redactor.m; path = Redactor/Redactor.m; sourceTree = "<group>"; };
+		7DC087581A701C1400AF307F /* SeamCarve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SeamCarve.c; path = Redactor/SeamCarve.c; sourceTree = "<group>"; };
+		7DC087591A701C1400AF307F /* SeamCarve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeamCarve.h; path = Redactor/SeamCarve.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,10 @@
 		7D86FCE91A6FE825004552A6 = {
 			isa = PBXGroup;
 			children = (
+				7DC087591A701C1400AF307F /* SeamCarve.h */,
+				7DC087581A701C1400AF307F /* SeamCarve.c */,
+				7D86FD1B1A6FF17C004552A6 /* Redactor.h */,
+				7D86FD1C1A6FF17C004552A6 /* Redactor.m */,
 				7D86FCF41A6FE825004552A6 /* Redactor */,
 				7D86FD0E1A6FE825004552A6 /* RedactorTests */,
 				7D86FCF31A6FE825004552A6 /* Products */,
@@ -168,6 +178,7 @@
 				TargetAttributes = {
 					7D86FCF11A6FE825004552A6 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = SKWNJR3SRG;
 					};
 					7D86FD0A1A6FE825004552A6 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -220,8 +231,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D86FCFE1A6FE825004552A6 /* ViewController.m in Sources */,
+				7D86FD1D1A6FF17C004552A6 /* Redactor.m in Sources */,
 				7D86FCFB1A6FE825004552A6 /* AppDelegate.m in Sources */,
 				7D86FCF81A6FE825004552A6 /* main.m in Sources */,
+				7DC0875A1A701C1400AF307F /* SeamCarve.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Redactor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -355,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Redactor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,6 +429,7 @@
 				7D86FD171A6FE825004552A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D86FD181A6FE825004552A6 /* Build configuration list for PBXNativeTarget "RedactorTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +438,7 @@
 				7D86FD1A1A6FE825004552A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
