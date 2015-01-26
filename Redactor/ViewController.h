@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, PaintMode) {
-    PaintModeBlur,
+    PaintModeNone,
     PaintModeBlack,
-    PaintModeWhite
+    PaintModePending
 };
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate>
@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, PaintMode) {
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *openButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *modeButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *blurButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *blackButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *whiteButton;
@@ -27,6 +28,7 @@ typedef NS_ENUM(NSUInteger, PaintMode) {
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)doOpen:(id)sender;
+- (IBAction)changeMode:(id)sender;
 - (IBAction)doBlur:(id)sender;
 - (IBAction)doBlack:(id)sender;
 - (IBAction)doWhite:(id)sender;

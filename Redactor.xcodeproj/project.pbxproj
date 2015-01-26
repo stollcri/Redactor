@@ -49,6 +49,12 @@
 		7D86FD1C1A6FF17C004552A6 /* Redactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Redactor.m; path = Redactor/Redactor.m; sourceTree = "<group>"; };
 		7DC087581A701C1400AF307F /* SeamCarve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SeamCarve.c; path = Redactor/SeamCarve.c; sourceTree = "<group>"; };
 		7DC087591A701C1400AF307F /* SeamCarve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeamCarve.h; path = Redactor/SeamCarve.h; sourceTree = "<group>"; };
+		7DDBEF561A76A077002A81FC /* Move-66.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move-66.png"; sourceTree = "<group>"; };
+		7DDBEF571A76A077002A81FC /* Move-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move-44.png"; sourceTree = "<group>"; };
+		7DDBEF581A76A077002A81FC /* Move-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move-22.png"; sourceTree = "<group>"; };
+		7DDBEF591A76A077002A81FC /* Pencil-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pencil-22.png"; sourceTree = "<group>"; };
+		7DDBEF5A1A76A077002A81FC /* Pencil-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pencil-44.png"; sourceTree = "<group>"; };
+		7DDBEF5B1A76A077002A81FC /* Pencil-66.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pencil-66.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,12 @@
 		7D86FCF51A6FE825004552A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7DDBEF561A76A077002A81FC /* Move-66.png */,
+				7DDBEF571A76A077002A81FC /* Move-44.png */,
+				7DDBEF581A76A077002A81FC /* Move-22.png */,
+				7DDBEF591A76A077002A81FC /* Pencil-22.png */,
+				7DDBEF5A1A76A077002A81FC /* Pencil-44.png */,
+				7DDBEF5B1A76A077002A81FC /* Pencil-66.png */,
 				7D86FCF61A6FE825004552A6 /* Info.plist */,
 				7D86FCF71A6FE825004552A6 /* main.m */,
 			);

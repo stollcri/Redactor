@@ -11,7 +11,7 @@
 #import "Redactor.h"
 
 #define MAXIMUM_IMG_SIZE 1024
-#define PAINT_BRUSH_SIZE 18.0
+#define PAINT_BRUSH_SIZE 20.0
 #define PAINT_BRUSH_ALPHA 1.0
 #define PAINT_BRUSH_R 0.0
 #define PAINT_BRUSH_G 0.0
@@ -24,8 +24,7 @@
 @property UIImageView *redactImageView;
 @property UIImageView *paintImageView;
 
-@property int brushSize;
-@property BOOL hasMaskData;
+@property CGFloat brushSize;
 @property BOOL mouseSwiped;
 @property CGPoint lastPoint;
 @property PaintMode paintMode;
@@ -42,13 +41,14 @@
     [super viewDidLoad];
     
     // settings for story board items
-    self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    //self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    self.scrollView.userInteractionEnabled = NO;
     self.scrollView.delegate = self;
     
     // settings for private class properties
     self.redactor = [[Redactor alloc] init];
-    self.brushSize = PAINT_BRUSH_SIZE;
-    self.paintMode = 0;
+    self.brushSize = PAINT_BRUSH_SIZE - (2 * self.scrollView.zoomScale);
+    self.paintMode = PaintModePending;
     
     // notifications
     NSNotificationCenter *defaultNotifCenter = [NSNotificationCenter defaultCenter];
@@ -209,8 +209,9 @@
             self.redactImageView = redactView;
             self.paintImageView = paintView;
             
-            self.hasMaskData = NO;
-            self.paintMode = 1;
+            if (self.paintMode == PaintModePending) {
+                self.paintMode = PaintModeBlack;
+            }
             
             [self.activityIndicator stopAnimating];
             NSValue *animationDurationValue = @0.2;
@@ -243,16 +244,15 @@
     subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,
                                  scrollView.contentSize.height * 0.5 + offsetY);
     
-    NSLog(@"%f", scrollView.zoomScale);
+    self.brushSize = PAINT_BRUSH_SIZE - (2 * scrollView.zoomScale);
 }
 
 #pragma mark - UI Responders
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.paintMode) {
+    if (self.paintMode == PaintModeBlack) {
         self.mouseSwiped = NO;
-        self.hasMaskData = YES;
         UITouch *touch = [touches anyObject];
         self.lastPoint = [touch locationInView:self.paintImageView];
     }
@@ -260,7 +260,7 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.paintMode) {
+    if (self.paintMode == PaintModeBlack) {
         self.mouseSwiped = YES;
         UITouch *touch = [touches anyObject];
         CGPoint currentPoint = [touch locationInView:self.paintImageView];
@@ -270,7 +270,7 @@
         CGContextMoveToPoint(UIGraphicsGetCurrentContext(), self.lastPoint.x, self.lastPoint.y);
         CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), PAINT_BRUSH_SIZE);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), PAINT_BRUSH_R, PAINT_BRUSH_G, PAINT_BRUSH_B, 1.0);
         CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeNormal);
         CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
@@ -285,12 +285,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.paintMode) {
+    if (self.paintMode == PaintModeBlack) {
         if(!self.mouseSwiped) {
             UIGraphicsBeginImageContext(self.paintImageView.frame.size);
             [self.paintImageView.image drawInRect:CGRectMake(0, 0, self.paintImageView.frame.size.width, self.paintImageView.frame.size.height)];
             CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), PAINT_BRUSH_SIZE);
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
             CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), PAINT_BRUSH_R, PAINT_BRUSH_G, PAINT_BRUSH_B, 1.0);
             //CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
             CGContextMoveToPoint(UIGraphicsGetCurrentContext(), self.lastPoint.x, self.lastPoint.y);
@@ -317,13 +317,24 @@
 #pragma mark - IB Actions
 
 - (IBAction)doOpen:(id)sender {
-    self.paintMode = 0;
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
     imagePicker.allowsEditing = NO;
     [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)changeMode:(id)sender {
+    if ((self.paintMode == PaintModeBlack) || (self.paintMode == PaintModePending)) {
+        [self.scrollView setUserInteractionEnabled:YES];
+        self.paintMode = PaintModeNone;
+        [self.modeButton setImage:[UIImage imageNamed:@"Move"]];
+    } else {
+        [self.scrollView setUserInteractionEnabled:NO];
+        self.paintMode = PaintModeBlack;
+        [self.modeButton setImage:[UIImage imageNamed:@"Pencil"]];
+    }
 }
 
 - (IBAction)doBlur:(id)sender {

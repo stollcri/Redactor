@@ -30,6 +30,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="SZn-Ni-S2n"/>
+                                    <barButtonItem image="Pencil" id="bZm-31-mML">
+                                        <connections>
+                                            <action selector="changeMode:" destination="BYZ-38-t0r" id="j3z-Qh-JuB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="r6r-qJ-UL4"/>
                                     <barButtonItem systemItem="action" id="FP3-ae-XqG">
                                         <connections>
                                             <action selector="doSave:" destination="BYZ-38-t0r" id="zby-iE-KBc"/>
@@ -93,6 +99,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="SJj-zN-mkq" id="vsQ-b8-N28"/>
                         <outlet property="imageView" destination="OzM-eN-cnW" id="Wyo-RX-lcX"/>
+                        <outlet property="modeButton" destination="bZm-31-mML" id="hHq-mK-4MJ"/>
                         <outlet property="openButton" destination="bvi-zm-uxO" id="1Bg-Pv-rAp"/>
                         <outlet property="popoverAnchor" destination="4BC-fL-uzV" id="ZoM-Pn-cPA"/>
                         <outlet property="saveButton" destination="FP3-ae-XqG" id="1Xn-xA-wn3"/>
@@ -103,4 +110,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Pencil" width="22" height="22"/>
+    </resources>
 </document>
