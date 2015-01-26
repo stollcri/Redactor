@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D446BFB1A75E57500661EAC /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D446BFA1A75E57500661EAC /* ScrollViewController.m */; };
 		7D86FCF81A6FE825004552A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FCF71A6FE825004552A6 /* main.m */; };
 		7D86FCFB1A6FE825004552A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FCFA1A6FE825004552A6 /* AppDelegate.m */; };
 		7D86FCFE1A6FE825004552A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FCFD1A6FE825004552A6 /* ViewController.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D446BF91A75E57500661EAC /* ScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
+		7D446BFA1A75E57500661EAC /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
 		7D86FCF21A6FE825004552A6 /* Redactor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Redactor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D86FCF61A6FE825004552A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D86FCF71A6FE825004552A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				7D86FCFA1A6FE825004552A6 /* AppDelegate.m */,
 				7D86FCFC1A6FE825004552A6 /* ViewController.h */,
 				7D86FCFD1A6FE825004552A6 /* ViewController.m */,
+				7D446BF91A75E57500661EAC /* ScrollViewController.h */,
+				7D446BFA1A75E57500661EAC /* ScrollViewController.m */,
 				7D86FCFF1A6FE825004552A6 /* Main.storyboard */,
 				7D86FD021A6FE825004552A6 /* Images.xcassets */,
 				7D86FD041A6FE825004552A6 /* LaunchScreen.xib */,
@@ -233,6 +238,7 @@
 				7D86FCFE1A6FE825004552A6 /* ViewController.m in Sources */,
 				7D86FD1D1A6FF17C004552A6 /* Redactor.m in Sources */,
 				7D86FCFB1A6FE825004552A6 /* AppDelegate.m in Sources */,
+				7D446BFB1A75E57500661EAC /* ScrollViewController.m in Sources */,
 				7D86FCF81A6FE825004552A6 /* main.m in Sources */,
 				7DC0875A1A701C1400AF307F /* SeamCarve.c in Sources */,
 			);

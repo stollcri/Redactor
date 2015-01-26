@@ -24,6 +24,7 @@
 @property UIImageView *redactImageView;
 @property UIImageView *paintImageView;
 
+@property int brushSize;
 @property BOOL hasMaskData;
 @property BOOL mouseSwiped;
 @property CGPoint lastPoint;
@@ -40,12 +41,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // settings for story board items
+    self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    self.scrollView.delegate = self;
+    
+    // settings for private class properties
     self.redactor = [[Redactor alloc] init];
+    self.brushSize = PAINT_BRUSH_SIZE;
+    self.paintMode = 0;
+    
+    // notifications
     NSNotificationCenter *defaultNotifCenter = [NSNotificationCenter defaultCenter];
     [defaultNotifCenter addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loadRedactMasks:) name:@"org.christopherstoll.squared.maskingComplete" object:nil];
-    
-    self.paintMode = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +94,39 @@
     return results;
 }
 
+- (UIImage*)imageFromView:(UIView *)view
+{
+    // Create a graphics context with the target size
+    CGSize imageSize = view.frame.size;// [view bounds].size;
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // -renderInContext: renders in the coordinate space of the layer,
+    // so we must first apply the layer's geometry to the graphics context
+    CGContextSaveGState(context);
+    // Center the context around the view's anchor point
+    CGContextTranslateCTM(context, [view center].x, [view center].y);
+    // Apply the view's transform about the anchor point
+    CGContextConcatCTM(context, [view transform]);
+    // Offset by the portion of the bounds left of and above the anchor point
+    CGContextTranslateCTM(context,
+                          -[view bounds].size.width * [[view layer] anchorPoint].x,
+                          -[view bounds].size.height * [[view layer] anchorPoint].y);
+    
+    // Render the layer hierarchy to the current context
+    [[view layer] renderInContext:context];
+    
+    // Restore the context
+    CGContextRestoreGState(context);
+    
+    // Retrieve the screenshot image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 #pragma mark - UIImagePickerControllerDelegate methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -99,12 +140,18 @@
         [self.imageView setAlpha:0.4];
         [self.imageView setImage:img];
         
+        self.scrollView.contentSize = CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height);
+        self.scrollView.clipsToBounds = YES;
+        self.scrollView.contentSize = self.imageView.bounds.size;
+        
+        self.scrollView.minimumZoomScale = 1.0;
+        self.scrollView.maximumZoomScale = 4.0;
+        self.scrollView.zoomScale = 1.0;
+        
         [self.redactImageView removeFromSuperview];
         // launch redact mask algorithm on a background thread
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            
-            // make sure choosen image is less than maximum size
+            // make sure choosen image is less than maximum size, to increase performance
             CGSize newSize;
             if ((img.size.height > MAXIMUM_IMG_SIZE) || (img.size.width > MAXIMUM_IMG_SIZE)) {
                 int temp = 0.0;
@@ -177,6 +224,28 @@
     });
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    UIView *subView = self.imageView;
+    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
+    (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
+    
+    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
+    (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
+    
+    subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,
+                                 scrollView.contentSize.height * 0.5 + offsetY);
+    
+    NSLog(@"%f", scrollView.zoomScale);
+}
+
 #pragma mark - UI Responders
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -205,15 +274,6 @@
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), PAINT_BRUSH_R, PAINT_BRUSH_G, PAINT_BRUSH_B, 1.0);
         CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeNormal);
         CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
-        
-        //CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
-        //CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeSourceAtop);
-        //CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeScreen);
-        //CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeSourceIn);
-        
-        //CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeColor);
-        //CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
-        
         CGContextStrokePath(UIGraphicsGetCurrentContext());
         self.paintImageView.image = UIGraphicsGetImageFromCurrentImageContext();
         [self.paintImageView setAlpha:PAINT_BRUSH_ALPHA];
@@ -276,9 +336,7 @@
 }
 
 - (IBAction)doSave:(id)sender {
-    UIImage *imagetoshare;
-    imagetoshare = self.imageView.image;
-    
+    UIImage *imagetoshare = [self imageFromView:self.imageView];
     if (imagetoshare) {
         NSArray *activityItems = @[imagetoshare];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -287,4 +345,5 @@
         [self presentViewController:activityVC animated:TRUE completion:nil];
     }
 }
+
 @end

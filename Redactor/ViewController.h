@@ -14,8 +14,9 @@ typedef NS_ENUM(NSUInteger, PaintMode) {
     PaintModeWhite
 };
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *openButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *blurButton;
