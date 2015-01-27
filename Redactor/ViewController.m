@@ -29,6 +29,8 @@
 @property CGPoint lastPoint;
 @property PaintMode paintMode;
 
+@property NSArray *undoSequence;
+
 @end
 
 @implementation ViewController
@@ -49,6 +51,7 @@
     self.redactor = [[Redactor alloc] init];
     self.brushSize = PAINT_BRUSH_SIZE - (2 * self.scrollView.zoomScale);
     self.paintMode = PaintModePending;
+
     
     // notifications
     NSNotificationCenter *defaultNotifCenter = [NSNotificationCenter defaultCenter];
@@ -196,13 +199,19 @@
         if (redactMask) {
             //[self.imageView setImage:redactMask];
             
-            CGRect tempFrame = [self getDisplaySizeOfImageView:self.imageView];
+            CGRect tempFrame = self.imageView.frame;//[self getDisplaySizeOfImageView:self.imageView];
             UIImageView *redactView = [[UIImageView alloc] initWithFrame:tempFrame];
-            tempFrame.origin.x = 0;
-            tempFrame.origin.y = 0;
-            UIImageView *paintView = [[UIImageView alloc] initWithFrame:tempFrame];
+            redactView.contentMode = UIViewContentModeScaleAspectFit;
+            redactView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            redactView.autoresizesSubviews = YES;
             [redactView setImage:redactMask];
-            [redactView setContentMode:UIViewContentModeScaleToFill];
+            
+//            tempFrame.origin.x = 0;
+//            tempFrame.origin.y = 0;
+            UIImageView *paintView = [[UIImageView alloc] initWithFrame:tempFrame];
+            paintView.contentMode = UIViewContentModeScaleAspectFit;
+//            paintView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            
             [redactView setMaskView:paintView];
             [self.imageView addSubview:redactView];
             
@@ -273,7 +282,7 @@
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), PAINT_BRUSH_R, PAINT_BRUSH_G, PAINT_BRUSH_B, 1.0);
         CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeNormal);
-        CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
+        //CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), YES);
         CGContextStrokePath(UIGraphicsGetCurrentContext());
         self.paintImageView.image = UIGraphicsGetImageFromCurrentImageContext();
         [self.paintImageView setAlpha:PAINT_BRUSH_ALPHA];
@@ -306,11 +315,7 @@
 - (void)deviceOrientationDidChange:(NSNotification *)notification
 {
     if (self.paintImageView) {
-        CGRect tempFrame = [self getDisplaySizeOfImageView:self.imageView];
-        [self.redactImageView setFrame:tempFrame];
-        tempFrame.origin.x = 0;
-        tempFrame.origin.y = 0;
-        [self.paintImageView setFrame:tempFrame];
+        [self.paintImageView setFrame:self.redactImageView.bounds];
     }
 }
 
