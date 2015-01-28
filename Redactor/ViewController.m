@@ -10,12 +10,13 @@
 #import "ViewController.h"
 #import "Redactor.h"
 
-#define MAXIMUM_IMG_SIZE 1024
+#define MAXIMUM_IMG_SIZE 1000
 #define PAINT_BRUSH_SIZE 20.0
 #define PAINT_BRUSH_ALPHA 1.0
 #define PAINT_BRUSH_R 0.0
 #define PAINT_BRUSH_G 0.0
 #define PAINT_BRUSH_B 0.0
+#define UNDO_LIMIT 1024
 
 @interface ViewController ()
 
@@ -29,7 +30,7 @@
 @property CGPoint lastPoint;
 @property PaintMode paintMode;
 
-@property NSArray *undoSequence;
+@property NSMutableArray *undoSequence; // TODO: use undoManager?
 
 @end
 
@@ -51,6 +52,7 @@
     self.redactor = [[Redactor alloc] init];
     self.brushSize = PAINT_BRUSH_SIZE - (2 * self.scrollView.zoomScale);
     self.paintMode = PaintModePending;
+    self.undoSequence = [[NSMutableArray alloc] init];
 
     
     // notifications
@@ -95,6 +97,14 @@
     results.origin.y = imageView.center.y - roundf(results.size.height / 2);
     
     return results;
+}
+
+- (void)addUndoData:(CGRect)rect
+{
+    if (self.undoSequence.count >= UNDO_LIMIT) {
+        [self.undoSequence removeObjectAtIndex:0];
+    }
+    [self.undoSequence addObject:[NSValue valueWithCGRect:rect]];
 }
 
 - (UIImage*)imageFromView:(UIView *)view
@@ -206,11 +216,8 @@
             redactView.autoresizesSubviews = YES;
             [redactView setImage:redactMask];
             
-//            tempFrame.origin.x = 0;
-//            tempFrame.origin.y = 0;
             UIImageView *paintView = [[UIImageView alloc] initWithFrame:tempFrame];
             paintView.contentMode = UIViewContentModeScaleAspectFit;
-//            paintView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             
             [redactView setMaskView:paintView];
             [self.imageView addSubview:redactView];
@@ -264,6 +271,12 @@
         self.mouseSwiped = NO;
         UITouch *touch = [touches anyObject];
         self.lastPoint = [touch locationInView:self.paintImageView];
+        
+        if (touch.view != self.toolbar) {
+            CGRect currentLine = CGRectMake(self.lastPoint.x, self.lastPoint.y, self.lastPoint.x, self.lastPoint.y);
+            [self addUndoData:currentLine];
+            [self.undoButton setEnabled:YES];
+        }
     }
 }
 
@@ -287,6 +300,9 @@
         self.paintImageView.image = UIGraphicsGetImageFromCurrentImageContext();
         [self.paintImageView setAlpha:PAINT_BRUSH_ALPHA];
         UIGraphicsEndImageContext();
+        
+        CGRect currentLine = CGRectMake(self.lastPoint.x, self.lastPoint.y, currentPoint.x, currentPoint.y);
+        [self addUndoData:currentLine];
         
         self.lastPoint = currentPoint;
     }
@@ -342,13 +358,37 @@
     }
 }
 
-- (IBAction)doBlur:(id)sender {
-}
-
-- (IBAction)doBlack:(id)sender {
-}
-
-- (IBAction)doWhite:(id)sender {
+- (IBAction)undo:(id)sender {
+    BOOL stopPointFound = NO;
+    
+    while (self.undoSequence && !stopPointFound) {
+        CGRect currentUndo = [[self.undoSequence lastObject] CGRectValue];
+        [self.undoSequence removeLastObject];
+        
+        CGPoint startPoint = CGPointMake(currentUndo.origin.x, currentUndo.origin.y);
+        CGPoint endPoint = CGPointMake(currentUndo.size.width, currentUndo.size.height);
+        
+        if ((startPoint.x == endPoint.x) && (startPoint.y == endPoint.y)) {
+            stopPointFound = YES;
+        }
+        
+        UIGraphicsBeginImageContext(self.paintImageView.frame.size);
+        [self.paintImageView.image drawInRect:CGRectMake(0, 0, self.paintImageView.frame.size.width, self.paintImageView.frame.size.height)];
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), (self.brushSize + 1));
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), PAINT_BRUSH_R, PAINT_BRUSH_G, PAINT_BRUSH_B, 1.0);
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), endPoint.x, endPoint.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), startPoint.x, startPoint.y);
+        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        CGContextFlush(UIGraphicsGetCurrentContext());
+        self.paintImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    if (self.undoSequence.count <= 0) {
+        [self.undoButton setEnabled:NO];
+    }
 }
 
 - (IBAction)doSave:(id)sender {
