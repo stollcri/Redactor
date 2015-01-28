@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Redactor
+
+  Created by Christopher Stoll on 1/28/15.
+  Copyright (c) 2015 Christopher Stoll. All rights reserved.
+*/
+
+CFBundleDisplayName = "редактор";
+NSHumanReadableCopyright = "Copyright © 2015 Кристофер Stoll";
