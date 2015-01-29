@@ -69,7 +69,7 @@
                                     <constraint firstAttribute="width" constant="20" id="AZe-uy-srT"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mE-P4-38i" customClass="ScrollViewController">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mE-P4-38i" customClass="ScrollViewController">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OzM-eN-cnW">
