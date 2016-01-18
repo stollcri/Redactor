@@ -93,11 +93,12 @@ static int getPixelGaussian(struct pixel *imageVector, int imageWidth, int image
     points[24] = currentPixel + imageByteWidth + imageByteWidth + pixelDepth + pixelDepth;
     
     // TODO: this is wrong, fix it
+    int imageSize = imageHeight * imageWidth * pixelDepth;
     for (int i = 0; i < 25; ++i) {
         if (points[i] < 0) {
             points[i] = 0;
-        } else if (points[i] >= (imageHeight * imageWidth * pixelDepth)) {
-            points[i] = (imageHeight * imageWidth * pixelDepth) - 1;
+        } else if (points[i] >= imageSize) {
+            points[i] = imageSize - 1;
         }
     }
     
@@ -386,9 +387,8 @@ static void setPixelPathHorizontal(struct pixel *imageVector, int imageWidth, in
     }
 }
 
-static int fillSeamMatrixHorizontal(struct pixel *imageVector, int imageWidth, int imageHeight)
+static void fillSeamMatrixHorizontal(struct pixel *imageVector, int imageWidth, int imageHeight)
 {
-    int result = 0;
     int currentPixel = 0;
     // do not process the first row, start with j=1
     // must be in reverse order from verticle seam, calulate colums as we move across (top down, left to right)
@@ -396,13 +396,8 @@ static int fillSeamMatrixHorizontal(struct pixel *imageVector, int imageWidth, i
         for (int j = 1; j < imageHeight; ++j) {
             currentPixel = (j * imageWidth) + i;
             setPixelPathHorizontal(imageVector, imageWidth, imageHeight, currentPixel, i);
-            
-            if (imageVector[currentPixel].seamval != 0) {
-                ++result;
-            }
         }
     }
-    return result;
 }
 
 static void findSeamsHorizontal(struct pixel *imageVector, int imageWidth, int imageHeight)

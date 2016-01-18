@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "Redactor.h"
 
-#define MAXIMUM_IMG_SIZE 1000
+#define MAXIMUM_IMG_SIZE 1024
 #define PAINT_BRUSH_SIZE 20.0
 #define PAINT_BRUSH_ALPHA 1.0
 #define PAINT_BRUSH_R 0.0
