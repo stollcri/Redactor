@@ -16,6 +16,24 @@
 		7D86FD061A6FE825004552A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D86FD041A6FE825004552A6 /* LaunchScreen.xib */; };
 		7D86FD121A6FE825004552A6 /* RedactorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FD111A6FE825004552A6 /* RedactorTests.m */; };
 		7D86FD1D1A6FF17C004552A6 /* Redactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FD1C1A6FF17C004552A6 /* Redactor.m */; };
+		7D915C7F1C7D3908004FEF28 /* Gear-22.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C7C1C7D3908004FEF28 /* Gear-22.png */; };
+		7D915C801C7D3908004FEF28 /* Gear-44.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C7D1C7D3908004FEF28 /* Gear-44.png */; };
+		7D915C811C7D3908004FEF28 /* Gear-66.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C7E1C7D3908004FEF28 /* Gear-66.png */; };
+		7D915C841C7D3C85004FEF28 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D915C831C7D3C85004FEF28 /* OptionViewController.m */; };
+		7D915C951C7EB0BF004FEF28 /* New icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C881C7EB0BF004FEF28 /* New icon-60@2x.png */; };
+		7D915C961C7EB0BF004FEF28 /* New icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C891C7EB0BF004FEF28 /* New icon-60@3x.png */; };
+		7D915C971C7EB0BF004FEF28 /* New icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8A1C7EB0BF004FEF28 /* New icon-76.png */; };
+		7D915C981C7EB0BF004FEF28 /* New icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8B1C7EB0BF004FEF28 /* New icon-76@2x.png */; };
+		7D915C991C7EB0BF004FEF28 /* New icon-167@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8C1C7EB0BF004FEF28 /* New icon-167@2x.png */; };
+		7D915C9A1C7EB0BF004FEF28 /* New icon-AppStore.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8D1C7EB0BF004FEF28 /* New icon-AppStore.png */; };
+		7D915C9B1C7EB0BF004FEF28 /* New icon-AppStore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8E1C7EB0BF004FEF28 /* New icon-AppStore@2x.png */; };
+		7D915C9C1C7EB0BF004FEF28 /* New icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C8F1C7EB0BF004FEF28 /* New icon-Small-40.png */; };
+		7D915C9D1C7EB0BF004FEF28 /* New icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C901C7EB0BF004FEF28 /* New icon-Small-40@2x.png */; };
+		7D915C9E1C7EB0BF004FEF28 /* New icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C911C7EB0BF004FEF28 /* New icon-Small-40@3x.png */; };
+		7D915C9F1C7EB0BF004FEF28 /* New icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C921C7EB0BF004FEF28 /* New icon-Small.png */; };
+		7D915CA01C7EB0BF004FEF28 /* New icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C931C7EB0BF004FEF28 /* New icon-Small@2x.png */; };
+		7D915CA11C7EB0BF004FEF28 /* New icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915C941C7EB0BF004FEF28 /* New icon-Small@3x.png */; };
+		7D915CA31C7EB1A1004FEF28 /* New icon-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D915CA21C7EB1A1004FEF28 /* New icon-83.5@2x.png */; };
 		7D93AABA1A794F550084AE03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D93AABC1A794F550084AE03 /* InfoPlist.strings */; };
 		7DC0875A1A701C1400AF307F /* SeamCarve.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DC087581A701C1400AF307F /* SeamCarve.c */; };
 /* End PBXBuildFile section */
@@ -48,6 +66,26 @@
 		7D86FD111A6FE825004552A6 /* RedactorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedactorTests.m; sourceTree = "<group>"; };
 		7D86FD1B1A6FF17C004552A6 /* Redactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Redactor.h; path = Redactor/Redactor.h; sourceTree = "<group>"; };
 		7D86FD1C1A6FF17C004552A6 /* Redactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Redactor.m; path = Redactor/Redactor.m; sourceTree = "<group>"; };
+		7D915C7C1C7D3908004FEF28 /* Gear-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gear-22.png"; sourceTree = "<group>"; };
+		7D915C7D1C7D3908004FEF28 /* Gear-44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gear-44.png"; sourceTree = "<group>"; };
+		7D915C7E1C7D3908004FEF28 /* Gear-66.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gear-66.png"; sourceTree = "<group>"; };
+		7D915C821C7D3C85004FEF28 /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
+		7D915C831C7D3C85004FEF28 /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
+		7D915C861C7D528C004FEF28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		7D915C881C7EB0BF004FEF28 /* New icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-60@2x.png"; sourceTree = "<group>"; };
+		7D915C891C7EB0BF004FEF28 /* New icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-60@3x.png"; sourceTree = "<group>"; };
+		7D915C8A1C7EB0BF004FEF28 /* New icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-76.png"; sourceTree = "<group>"; };
+		7D915C8B1C7EB0BF004FEF28 /* New icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-76@2x.png"; sourceTree = "<group>"; };
+		7D915C8C1C7EB0BF004FEF28 /* New icon-167@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-167@2x.png"; sourceTree = "<group>"; };
+		7D915C8D1C7EB0BF004FEF28 /* New icon-AppStore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-AppStore.png"; sourceTree = "<group>"; };
+		7D915C8E1C7EB0BF004FEF28 /* New icon-AppStore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-AppStore@2x.png"; sourceTree = "<group>"; };
+		7D915C8F1C7EB0BF004FEF28 /* New icon-Small-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small-40.png"; sourceTree = "<group>"; };
+		7D915C901C7EB0BF004FEF28 /* New icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small-40@2x.png"; sourceTree = "<group>"; };
+		7D915C911C7EB0BF004FEF28 /* New icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small-40@3x.png"; sourceTree = "<group>"; };
+		7D915C921C7EB0BF004FEF28 /* New icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small.png"; sourceTree = "<group>"; };
+		7D915C931C7EB0BF004FEF28 /* New icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small@2x.png"; sourceTree = "<group>"; };
+		7D915C941C7EB0BF004FEF28 /* New icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-Small@3x.png"; sourceTree = "<group>"; };
+		7D915CA21C7EB1A1004FEF28 /* New icon-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New icon-83.5@2x.png"; sourceTree = "<group>"; };
 		7D93AAA51A794C610084AE03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D93AAA61A794C610084AE03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7D93AAA71A794C660084AE03 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -135,6 +173,8 @@
 				7D86FCFD1A6FE825004552A6 /* ViewController.m */,
 				7D446BF91A75E57500661EAC /* ScrollViewController.h */,
 				7D446BFA1A75E57500661EAC /* ScrollViewController.m */,
+				7D915C821C7D3C85004FEF28 /* OptionViewController.h */,
+				7D915C831C7D3C85004FEF28 /* OptionViewController.m */,
 				7D86FCFF1A6FE825004552A6 /* Main.storyboard */,
 				7D86FD021A6FE825004552A6 /* Images.xcassets */,
 				7D86FD041A6FE825004552A6 /* LaunchScreen.xib */,
@@ -146,6 +186,7 @@
 		7D86FCF51A6FE825004552A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7D915C871C7EB0B0004FEF28 /* Logos */,
 				7D93AAB71A794EA70084AE03 /* Icons Images */,
 				7D86FCF61A6FE825004552A6 /* Info.plist */,
 				7D93AABC1A794F550084AE03 /* InfoPlist.strings */,
@@ -171,9 +212,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7D915C871C7EB0B0004FEF28 /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				7D915C881C7EB0BF004FEF28 /* New icon-60@2x.png */,
+				7D915C891C7EB0BF004FEF28 /* New icon-60@3x.png */,
+				7D915C8A1C7EB0BF004FEF28 /* New icon-76.png */,
+				7D915CA21C7EB1A1004FEF28 /* New icon-83.5@2x.png */,
+				7D915C8B1C7EB0BF004FEF28 /* New icon-76@2x.png */,
+				7D915C8C1C7EB0BF004FEF28 /* New icon-167@2x.png */,
+				7D915C8D1C7EB0BF004FEF28 /* New icon-AppStore.png */,
+				7D915C8E1C7EB0BF004FEF28 /* New icon-AppStore@2x.png */,
+				7D915C8F1C7EB0BF004FEF28 /* New icon-Small-40.png */,
+				7D915C901C7EB0BF004FEF28 /* New icon-Small-40@2x.png */,
+				7D915C911C7EB0BF004FEF28 /* New icon-Small-40@3x.png */,
+				7D915C921C7EB0BF004FEF28 /* New icon-Small.png */,
+				7D915C931C7EB0BF004FEF28 /* New icon-Small@2x.png */,
+				7D915C941C7EB0BF004FEF28 /* New icon-Small@3x.png */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
 		7D93AAB71A794EA70084AE03 /* Icons Images */ = {
 			isa = PBXGroup;
 			children = (
+				7D915C7C1C7D3908004FEF28 /* Gear-22.png */,
+				7D915C7D1C7D3908004FEF28 /* Gear-44.png */,
+				7D915C7E1C7D3908004FEF28 /* Gear-66.png */,
 				7DDBEF561A76A077002A81FC /* Move-66.png */,
 				7DDBEF571A76A077002A81FC /* Move-44.png */,
 				7DDBEF581A76A077002A81FC /* Move-22.png */,
@@ -228,7 +293,7 @@
 		7D86FCEA1A6FE825004552A6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Christopher Stoll";
 				TargetAttributes = {
 					7D86FCF11A6FE825004552A6 = {
@@ -274,10 +339,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D915CA11C7EB0BF004FEF28 /* New icon-Small@3x.png in Resources */,
+				7D915CA31C7EB1A1004FEF28 /* New icon-83.5@2x.png in Resources */,
+				7D915C9F1C7EB0BF004FEF28 /* New icon-Small.png in Resources */,
+				7D915C7F1C7D3908004FEF28 /* Gear-22.png in Resources */,
+				7D915C981C7EB0BF004FEF28 /* New icon-76@2x.png in Resources */,
+				7D915C9E1C7EB0BF004FEF28 /* New icon-Small-40@3x.png in Resources */,
+				7D915C961C7EB0BF004FEF28 /* New icon-60@3x.png in Resources */,
 				7D86FD011A6FE825004552A6 /* Main.storyboard in Resources */,
+				7D915CA01C7EB0BF004FEF28 /* New icon-Small@2x.png in Resources */,
+				7D915C9A1C7EB0BF004FEF28 /* New icon-AppStore.png in Resources */,
+				7D915C9B1C7EB0BF004FEF28 /* New icon-AppStore@2x.png in Resources */,
 				7D93AABA1A794F550084AE03 /* InfoPlist.strings in Resources */,
+				7D915C811C7D3908004FEF28 /* Gear-66.png in Resources */,
 				7D86FD061A6FE825004552A6 /* LaunchScreen.xib in Resources */,
+				7D915C9C1C7EB0BF004FEF28 /* New icon-Small-40.png in Resources */,
+				7D915C951C7EB0BF004FEF28 /* New icon-60@2x.png in Resources */,
+				7D915C971C7EB0BF004FEF28 /* New icon-76.png in Resources */,
+				7D915C801C7D3908004FEF28 /* Gear-44.png in Resources */,
+				7D915C991C7EB0BF004FEF28 /* New icon-167@2x.png in Resources */,
 				7D86FD031A6FE825004552A6 /* Images.xcassets in Resources */,
+				7D915C9D1C7EB0BF004FEF28 /* New icon-Small-40@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D915C841C7D3C85004FEF28 /* OptionViewController.m in Sources */,
 				7D86FCFE1A6FE825004552A6 /* ViewController.m in Sources */,
 				7D86FD1D1A6FF17C004552A6 /* Redactor.m in Sources */,
 				7D86FCFB1A6FE825004552A6 /* AppDelegate.m in Sources */,
@@ -336,6 +419,7 @@
 				7D93AAB11A794CC90084AE03 /* pt */,
 				7D93AAB31A794CD80084AE03 /* id */,
 				7D93AAB51A794CE50084AE03 /* ms */,
+				7D915C861C7D528C004FEF28 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -397,6 +481,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -463,6 +548,7 @@
 				INFOPLIST_FILE = Redactor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.christopherstoll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -475,6 +561,7 @@
 				INFOPLIST_FILE = Redactor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.christopherstoll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -483,16 +570,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = RedactorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.christopherstoll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Redactor.app/Redactor";
 			};
@@ -502,12 +587,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = RedactorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.christopherstoll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Redactor.app/Redactor";
 			};

@@ -1,12 +1,12 @@
 
 /* Class = "UILabel"; text = "Pixelate Size"; ObjectID = "44Z-QX-2yF"; */
-"44Z-QX-2yF.text" = "尺寸像素化";
+"44Z-QX-2yF.text" = "Pixelate Size";
 
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[0] = "Black out"; ObjectID = "5fo-AZ-7AJ"; */
-"5fo-AZ-7AJ.segmentTitles[0]" = "黩";
+"5fo-AZ-7AJ.segmentTitles[0]" = "Black out";
 
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[1] = "Pixelate"; ObjectID = "5fo-AZ-7AJ"; */
-"5fo-AZ-7AJ.segmentTitles[1]" = "像素化";
+"5fo-AZ-7AJ.segmentTitles[1]" = "Pixelate";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "8u1-da-Hno"; */
-"8u1-da-Hno.normalTitle" = "保存";
+"8u1-da-Hno.normalTitle" = "Save";

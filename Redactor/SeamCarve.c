@@ -17,6 +17,14 @@
 #define SEAM_TRACE_INCREMENT 1
 #define THRESHHOLD_USECOUNT 64
 
+//#ifndef PNG_MAX
+//#ifdef PNG16BIT
+//#define PNG_MAX 65535
+//#else
+#define PNG_MAX 256
+//#endif
+//#endif
+
 #pragma mark - inlines (min/max)
 
 static inline int max(int a, int b)
@@ -52,6 +60,58 @@ static inline int min3(int a, int b, int c)
             return c;
         }
     }
+}
+
+#pragma mark - binarization
+
+static int otsuBinarization(int *histogram, int pixelCount, int pixelDepth)
+{
+    unsigned long long sum = 0;
+    unsigned long long oldsum = 0;
+    for(int i = 1; i < pixelDepth; ++i) {
+        oldsum = sum;
+        sum += i * histogram[i];
+        if(oldsum > sum) {
+            printf("ERROR: Integer Overflow (%llu + n => %llu)\n", oldsum, sum);
+        }
+    }
+    
+    unsigned long long sumB = 0;
+    unsigned long long wB = 0;
+    unsigned long long wF = 0;
+    unsigned long long mB;
+    unsigned long long mF;
+    long double max = 0.0;
+    long double between = 0.0;
+    long double threshold1 = 0.0;
+    long double threshold2 = 0.0;
+    
+    for(int i = 0; i < pixelDepth; ++i) {
+        wB += histogram[i];
+        
+        if(wB) {
+            wF = pixelCount - wB;
+            
+            if(wF == 0) {
+                break;
+            }
+            
+            sumB += i * histogram[i];
+            
+            mB = sumB / wB;
+            mF = (sum - sumB) / wF;
+            between = wB * wF * ((mB - mF) * (mB - mF));
+            
+            if(between >= max) {
+                threshold1 = i;
+                if(between > max) {
+                    threshold2 = i;
+                }
+                max = between;
+            }
+        }
+    }
+    return (int)((threshold1 + threshold2) / 2.0);
 }
 
 #pragma mark - edge detectors
@@ -514,26 +574,57 @@ void seamCarve(unsigned char *imageVector, int imageWidth, int imageHeight, int 
     
     struct pixel *workingImageH = (struct pixel*)malloc((unsigned long)imageWidth * (unsigned long)imageHeight * sizeof(struct pixel));
     
+    int bins[PNG_MAX];
+    for (int j = 0; j < PNG_MAX; ++j) {
+        bins[j] = 0;
+    }
+    
     int inputPixel = 0;
     int outputPixel = 0;
     int currentPixel = 0;
     int currentBrightness = 0;
-    double currentRadians = 0;
+//    double currentRadians = 0;
     // fill initial data structures
     for (int j = 0; j < imageHeight; ++j) {
         for (int i = 0; i < imageWidth; ++i) {
             currentPixel = (j * imageWidth) + i;
             inputPixel = currentPixel * imageDepth;
             
-            currentBrightness = (imageVector[inputPixel] * 0.299) + (imageVector[inputPixel+1] * 0.587) + (imageVector[inputPixel+2] * 0.114);
-            currentRadians = ((double)currentBrightness / 255.0) * 3.14159265359;
-            currentBrightness = (int)(((1.0 - cos(currentRadians)) / 2.0) * 255.0);
+            currentBrightness = ((imageVector[inputPixel] + imageVector[inputPixel+1] + imageVector[inputPixel+2]) / 3);
+//            currentBrightness = (imageVector[inputPixel] * 0.299) + (imageVector[inputPixel+1] * 0.587) + (imageVector[inputPixel+2] * 0.114);
+//            currentRadians = ((double)currentBrightness / 255.0) * 3.14159265359;
+//            currentBrightness = (int)(((1.0 - cos(currentRadians)) / 2.0) * 255.0);
+            
+            if (currentBrightness < PNG_MAX) {
+                bins[currentBrightness] += 1;
+            } else {
+                printf("oh noes: %d \n", currentBrightness);
+            }
             
             struct pixel newPixelH;
             newPixelH.bright = currentBrightness;
             newPixelH.seamval = 0;
             newPixelH.usecount = 0;
             workingImageH[currentPixel] = newPixelH;
+        }
+    }
+    
+    //
+    // binarization
+    //
+    
+    int threshold = otsuBinarization(bins, (imageWidth * imageHeight), PNG_MAX);
+    
+    // apply threshold
+    for (int j = 0; j < imageHeight; ++j) {
+        for (int i = 0; i < imageWidth; ++i) {
+            currentPixel = (j * imageWidth) + i;
+            currentBrightness = workingImageH[currentPixel].bright;
+            if (currentBrightness > threshold) {
+                workingImageH[currentPixel].bright = PNG_MAX;
+            } else {
+                workingImageH[currentPixel].bright = 0;
+            }
         }
     }
     
@@ -642,13 +733,13 @@ void seamCarve(unsigned char *imageVector, int imageWidth, int imageHeight, int 
     //
     
     fudge(imageVector, imageWidth, imageHeight, imageDepth);
-    fudge(imageVector, imageWidth, imageHeight, imageDepth);
-    fudge(imageVector, imageWidth, imageHeight, imageDepth);
+//    fudge(imageVector, imageWidth, imageHeight, imageDepth);
+//    fudge(imageVector, imageWidth, imageHeight, imageDepth);
     
     free(workingImageH);
 }
 
-void mergeImages(unsigned char *imageVector, unsigned char *pixelatePixels, int imgWidth, int imgHeight, int imgDepth, int faceCount, int *faceBounds)
+void mergeImages(unsigned char *imageVector, unsigned char *pixelatePixels, int imgWidth, int imgHeight, int imgDepth, int faceCount, int *faceBounds, int redactMode)
 {
     int outputPixel = 0;
     int currentPixel = 0;
@@ -658,10 +749,19 @@ void mergeImages(unsigned char *imageVector, unsigned char *pixelatePixels, int 
             currentPixel = (j * imgWidth) + i;
             outputPixel = currentPixel * imgDepth;
             
-            imageVector[outputPixel] = imageVector[outputPixel];
-            imageVector[outputPixel+1] = imageVector[outputPixel+1];
-            imageVector[outputPixel+2] = imageVector[outputPixel+2];
-            imageVector[outputPixel+3] = imageVector[outputPixel+3];
+            if (redactMode) {
+                if (imageVector[outputPixel+3] > 0) {
+                    imageVector[outputPixel] = pixelatePixels[outputPixel];
+                    imageVector[outputPixel+1] = pixelatePixels[outputPixel+1];
+                    imageVector[outputPixel+2] = pixelatePixels[outputPixel+2];
+                    imageVector[outputPixel+3] = pixelatePixels[outputPixel+3];
+                }
+            } else {
+                imageVector[outputPixel] = imageVector[outputPixel];
+                imageVector[outputPixel+1] = imageVector[outputPixel+1];
+                imageVector[outputPixel+2] = imageVector[outputPixel+2];
+                imageVector[outputPixel+3] = imageVector[outputPixel+3];
+            }
         }
     }
     

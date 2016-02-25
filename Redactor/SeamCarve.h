@@ -18,6 +18,6 @@ struct pixel {
 };
 
 void seamCarve(unsigned char *imageVector, int imageWidth, int imageHeight, int imageDepth, int faceCount, int *faceBounds);
-void mergeImages(unsigned char *imageVector, unsigned char *pixelatePixels, int imgWidth, int imgHeight, int imgDepth, int faceCount, int *faceBounds);
+void mergeImages(unsigned char *imageVector, unsigned char *pixelatePixels, int imgWidth, int imgHeight, int imgDepth, int faceCount, int *faceBounds, int redactMode);
 
 #endif /* defined(__Redactor__SeamCarve__) */

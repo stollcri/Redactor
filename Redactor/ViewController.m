@@ -10,6 +10,10 @@
 #import "ViewController.h"
 #import "Redactor.h"
 
+#define REDACT_MODE_BLACK @0
+#define REDACT_MODE_PIXELATE @1
+#define PIXEL_SIZE_DEFAULT @5
+
 #define MAXIMUM_IMG_SIZE 1024
 #define PAINT_BRUSH_SIZE 20.0
 #define PAINT_BRUSH_ALPHA 1.0
@@ -42,6 +46,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:REDACT_MODE_PIXELATE forKey:@"redactMode"];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pixelSize"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:PIXEL_SIZE_DEFAULT forKey:@"pixelSize"];
+    }
     
     // settings for story board items
     //self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
@@ -218,9 +229,13 @@
             
             UIImageView *paintView = [[UIImageView alloc] initWithFrame:tempFrame];
             paintView.contentMode = UIViewContentModeScaleAspectFit;
+            // DEBUG ONLY -- TO SEE MASK RESULTS
+            //[paintView setImage:redactMask];
             
             [redactView setMaskView:paintView];
             [self.imageView addSubview:redactView];
+            // DEBUG ONLY -- TO SEE MASK RESULTS
+            //[self.imageView setImage:redactMask];
             
             self.redactImageView = redactView;
             self.paintImageView = paintView;

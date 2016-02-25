@@ -108,7 +108,8 @@
     pixelateImgRef = nil;
     pixelateMask = nil;
     
-    mergeImages(rawPixels, pixelatePixels, (int)imgWidth, (int)imgHeight, (int)bytesPerPixel, faceCount, faceCoordinates);
+    int redactMode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] intValue];
+    mergeImages(rawPixels, pixelatePixels, (int)imgWidth, (int)imgHeight, (int)bytesPerPixel, faceCount, faceCoordinates, redactMode);
     free(pixelatePixels);
     free(faceCoordinates);
     
@@ -140,7 +141,8 @@
     CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIPixellate"];
     [gaussianBlurFilter setDefaults];
     [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[image CGImage]] forKey:@"inputImage"];
-    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:12] forKey:@"inputScale"];
+    float pixelSize = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pixelSize"] floatValue];
+    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:pixelSize] forKey:@"inputScale"];
     
     //        CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
     //        [gaussianBlurFilter setDefaults];
