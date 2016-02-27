@@ -138,11 +138,20 @@
     // CIPixellate
     // CIColorInvert
     // CIMotionBlur
-    CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIPixellate"];
-    [gaussianBlurFilter setDefaults];
-    [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[image CGImage]] forKey:@"inputImage"];
-    float pixelSize = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pixelSize"] floatValue];
-    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:pixelSize] forKey:@"inputScale"];
+    CIFilter *gaussianBlurFilter;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] intValue] == 2) {
+        gaussianBlurFilter = [CIFilter filterWithName:@"CIBoxBlur"];
+        [gaussianBlurFilter setDefaults];
+        [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[image CGImage]] forKey:@"inputImage"];
+        float pixelSize = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pixelSize"] floatValue];
+        [gaussianBlurFilter setValue:[NSNumber numberWithFloat:pixelSize] forKey:@"inputRadius"];
+    } else {
+        gaussianBlurFilter = [CIFilter filterWithName:@"CIPixellate"];
+        [gaussianBlurFilter setDefaults];
+        [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[image CGImage]] forKey:@"inputImage"];
+        float pixelSize = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pixelSize"] floatValue];
+        [gaussianBlurFilter setValue:[NSNumber numberWithFloat:pixelSize] forKey:@"inputScale"];
+    }
     
     //        CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
     //        [gaussianBlurFilter setDefaults];

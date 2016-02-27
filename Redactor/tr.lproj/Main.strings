@@ -1,15 +1,15 @@
 
 /* Class = "UILabel"; text = "Pixelate Size"; ObjectID = "44Z-QX-2yF"; */
-"44Z-QX-2yF.text" = "pixelate Tamanho";
+"44Z-QX-2yF.text" = "Piksel Boyutu";
 
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[0] = "Black out"; ObjectID = "5fo-AZ-7AJ"; */
-"5fo-AZ-7AJ.segmentTitles[0]" = "Denegrir";
+"5fo-AZ-7AJ.segmentTitles[0]" = "Lekelemek";
 
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[1] = "Pixelate"; ObjectID = "5fo-AZ-7AJ"; */
-"5fo-AZ-7AJ.segmentTitles[1]" = "Pixelate";
+"5fo-AZ-7AJ.segmentTitles[1]" = "Pikselleştir";
 
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[2] = "Blur"; ObjectID = "5fo-AZ-7AJ"; */
-"5fo-AZ-7AJ.segmentTitles[2]" = "Borrão";
+"5fo-AZ-7AJ.segmentTitles[2]" = "Bulanıklık";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "8u1-da-Hno"; */
-"8u1-da-Hno.normalTitle" = "Salvar";
+"8u1-da-Hno.normalTitle" = "Kaydet";

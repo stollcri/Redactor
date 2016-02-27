@@ -8,5 +8,8 @@
 /* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[1] = "Pixelate"; ObjectID = "5fo-AZ-7AJ"; */
 "5fo-AZ-7AJ.segmentTitles[1]" = "像素化";
 
+/* Class = "UISegmentedControl"; 5fo-AZ-7AJ.segmentTitles[2] = "Blur"; ObjectID = "5fo-AZ-7AJ"; */
+"5fo-AZ-7AJ.segmentTitles[2]" = "模糊";
+
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "8u1-da-Hno"; */
 "8u1-da-Hno.normalTitle" = "保存";

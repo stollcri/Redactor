@@ -22,7 +22,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] intValue] == 1) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] intValue] == 2) {
+        self.redactMode.selectedSegmentIndex = 2;
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"redactMode"] intValue] == 1) {
         self.redactMode.selectedSegmentIndex = 1;
     } else {
         self.redactMode.selectedSegmentIndex = 0;
